@@ -60,29 +60,27 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
 
-    /* ==========================
+   /* ==========================
        SCROLL ANIMATION
     ========================== */
 
-    const observer = new IntersectionObserver((entries) => {
+    const observer = new IntersectionObserver((entries, obs) => {
 
         entries.forEach(entry => {
 
             if (entry.isIntersecting) {
                 entry.target.classList.add("visible");
-            } else {
-                entry.target.classList.remove("visible");
+                obs.unobserve(entry.target); 
             }
 
         });
 
     }, {
-        threshold: 0.05,
-        rootMargin: "0px 0px -50px 0px"
+        threshold: 0.1,
+        rootMargin: "0px 0px -10% 0px" 
     });
 
     document.querySelectorAll(".animate-on-scroll").forEach(el => {
         observer.observe(el);
     });
-
 });
